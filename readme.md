@@ -1,3 +1,3 @@
-# 👷 Cute Engineering Dummy Library
+# 🖼️ Material design icons
 
-A library to be used as a template for new libraries.
+This is a collection of icons from [Material Design Icons](https://materialdesignicons.com/).

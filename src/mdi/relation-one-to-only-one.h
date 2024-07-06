@@ -1,0 +1,9 @@
+#pragma once
+
+#include "_prelude.h"
+
+namespace Mdi
+{
+    constexpr Icon RELATION_ONE_TO_ONLY_ONE = Icon(24, 24, "relation-one-to-only-one", "M22 15V17H21V19H19V17H18V19H16V17H11V9H7V11H5V9H2V7H5V5H7V7H13V15H16V13H18V15H19V13H21V15Z");
+} // namespace Mdi
+
