@@ -1,6 +1,7 @@
 
 #pragma once
 
+#ifdef __cplusplus
 namespace Mdi {
     struct Icon
     {
@@ -15,3 +16,5 @@ namespace Mdi {
         }
     };
 } // namespace Mdi
+#endif
+

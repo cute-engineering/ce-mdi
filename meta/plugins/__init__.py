@@ -57,12 +57,17 @@ def _():
         with open("src/mdi/" + icon["name"] + ".h", "w", encoding="utf8") as f:
             f.write(f"#pragma once\n\n")
             f.write(f'#include "_prelude.h"\n\n')
+            f.write(
+                f"#define MDI_{toConstantName(icon['name'])} {{24, 24, \"{icon['name']}\", \"{icon['path']}\"}}\n\n"
+            )
+            f.write(f"#ifdef __cplusplus\n")
             f.write(f"namespace Mdi\n")
             f.write("{\n")
             f.write(
                 f"    constexpr Icon {toConstantName(icon['name'])} = Icon(24, 24, \"{icon['name']}\", \"{icon['path']}\");\n"
             )
             f.write(f"}} // namespace Mdi\n")
+            f.write(f"#endif\n")
             f.write(f"\n")
 
     # create _prelude.h
@@ -70,6 +75,7 @@ def _():
         f.write(f"""
 #pragma once
 
+#ifdef __cplusplus
 namespace Mdi {{
     struct Icon
     {{
@@ -84,4 +90,12 @@ namespace Mdi {{
         }}
     }};
 }} // namespace Mdi
+#endif
+
+""")
+
+    with open("src/mdi/_mod.h", "w", encoding="utf8") as f:
+        f.write(f"""
+#pragma once
+#include "_prelude.h"
 """)

@@ -2,8 +2,12 @@
 
 #include "_prelude.h"
 
+#define MDI_SETTINGS_HELPER {24, 24, "settings-helper", "M7,22H9V24H7V22M11,22H13V24H11V22M15,22H17V24H15V22Z"}
+
+#ifdef __cplusplus
 namespace Mdi
 {
     constexpr Icon SETTINGS_HELPER = Icon(24, 24, "settings-helper", "M7,22H9V24H7V22M11,22H13V24H11V22M15,22H17V24H15V22Z");
 } // namespace Mdi
+#endif
 

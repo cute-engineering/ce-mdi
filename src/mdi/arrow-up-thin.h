@@ -2,8 +2,12 @@
 
 #include "_prelude.h"
 
+#define MDI_ARROW_UP_THIN {24, 24, "arrow-up-thin", "M7.03 9.97H11.03V18.89L13.04 18.92V9.97H17.03L12.03 4.97Z"}
+
+#ifdef __cplusplus
 namespace Mdi
 {
     constexpr Icon ARROW_UP_THIN = Icon(24, 24, "arrow-up-thin", "M7.03 9.97H11.03V18.89L13.04 18.92V9.97H17.03L12.03 4.97Z");
 } // namespace Mdi
+#endif
 
