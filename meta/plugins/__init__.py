@@ -6,7 +6,7 @@ import re
 
 from cutekit import ensure
 
-ensure((0, 7, 4))
+ensure((0, 8, 0))
 
 from cutekit import shell, const, cli
 
