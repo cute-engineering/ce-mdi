@@ -52,50 +52,37 @@ def _():
     with open("src/mdi/res/icons.json", "w", encoding="utf8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
 
-    # create a header file for each icons
-    for icon in meta:
-        with open("src/mdi/" + icon["name"] + ".h", "w", encoding="utf8") as f:
-            f.write(f"#pragma once\n\n")
-            f.write(f'#include "_prelude.h"\n\n')
-            f.write(
-                f"#define MDI_{toConstantName(icon['name'])} {{24, 24, \"{icon['name']}\", \"{icon['path']}\"}}\n\n"
-            )
-            f.write(f"#ifdef __cplusplus\n")
-            f.write(f"namespace Mdi\n")
-            f.write("{\n")
-            f.write(
-                f"    constexpr Icon {toConstantName(icon['name'])} = Icon(24, 24, \"{icon['name']}\", \"{icon['path']}\");\n"
-            )
-            f.write(f"}} // namespace Mdi\n")
-            f.write(f"#endif\n")
-            f.write(f"\n")
+    with open("src/mdi/mod.cpp", "w", encoding="utf8") as f:
+        f.write("""export module Mdi;
 
-    # create _prelude.h
-    with open("src/mdi/_prelude.h", "w", encoding="utf8") as f:
-        f.write(f"""
-#pragma once
+namespace Mdi {
 
-#ifdef __cplusplus
-namespace Mdi {{
-    struct Icon
-    {{
-        int width;
-        int height;
-        const char* name;
-        const char* path;
+export struct _Icon
+{
+    const char* name;
+    const char* path;
+    static constexpr int size = 24;
 
-        constexpr Icon(int width, int height, const char* name, const char* path)
-            : width(width), height(height), name(name), path(path)
-        {{
-        }}
-    }};
-}} // namespace Mdi
-#endif
-
+    constexpr _Icon(const char* name, const char* path)
+    : name(name), path(path)
+    {
+    }
+};
 """)
+        for icon in meta:
+            f.write(
+                f'    export _Icon {toConstantName(icon["name"])} = _Icon("{icon["name"]}", "{icon["path"]}");\n'
+            )
 
-    with open("src/mdi/_mod.h", "w", encoding="utf8") as f:
-        f.write(f"""
-#pragma once
-#include "_prelude.h"
-""")
+        f.write("export constexpr _Icon* _ALL[] = {\n")
+        for icon in meta:
+            f.write(f"    &{toConstantName(icon['name'])},\n")
+        f.write("nullptr};\n")
+
+        f.write("} // namespace Mdi\n")
+
+    shell.exec(
+        "clang-format",
+        "-i",
+        "src/mdi/mod.cpp",
+    )
