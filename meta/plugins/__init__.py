@@ -6,12 +6,12 @@ import re
 
 from cutekit import ensure
 
-ensure((0, 8, 0))
+ensure((0, 9, 0))
 
 from cutekit import shell, const, cli
 
 
-@cli.command(None, "mdi", "Manage Material Design Icons")
+@cli.command("mdi", "Manage Material Design Icons")
 def _():
     pass
 
@@ -34,7 +34,7 @@ def toConstantName(name: str):
     return re.sub(r"[^a-zA-Z0-9]", "_", name).upper()
 
 
-@cli.command(None, "mdi/sync", "Sync Material Design Icons")
+@cli.command("mdi/sync", "Sync Material Design Icons")
 def _():
     dest = const.CACHE_DIR + "/MaterialDesign/src"
     if not os.path.exists(dest):
